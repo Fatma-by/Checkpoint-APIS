@@ -1,9 +1,8 @@
-
-const User = require("../models/User");
-
+const User = require("./models/User");
 
 
-app.get('/users', async (req, res) => {
+
+async function createUser (req, res) {
     console.log(res)
     try {
       const users = await User.find();
@@ -11,10 +10,10 @@ app.get('/users', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: 'Erreur lors de la récupération des utilisateurs.' });
     }
-  });
+  };
   
   // Route POST pour ajouter un nouvel utilisateur
-  app.post('/user', async (req, res) => {
+  async function createNewUser(req, res) {
     try {
       const newUser = new User(req.body);
       await newUser.save();
@@ -22,10 +21,10 @@ app.get('/users', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: 'Erreur lors de l\'ajout de l\'utilisateur.' });
     }
-  });
+  };
   
   // Route PUT pour modifier un utilisateur par ID
-  app.put('/users/:id', async (req, res) => {
+   async function findById(req, res) {
     try {
       const userId = req.params.id;
       const updatedUser = req.body;
@@ -35,10 +34,10 @@ app.get('/users', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: 'Erreur lors de la modification de l\'utilisateur.' });
     }
-  });
+  };
   
   // Route DELETE pour supprimer un utilisateur par ID
-  app.delete('/users/:id', async (req, res) => {
+  async function findAndDelete(req, res)  {
     try {
       const userId = req.params.id;
   
@@ -48,5 +47,12 @@ app.get('/users', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: 'Erreur lors de la suppression de l\'utilisateur.' });
     }
-  });
-  
+  };
+
+  module.exports ={
+    createUser,
+    createNewUser,
+    findById,
+    findAndDelete
+
+  }

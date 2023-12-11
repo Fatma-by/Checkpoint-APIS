@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 // injecting env variables
 require("dotenv").config();
+
 // importing mongoose module
 const mongoose = require("mongoose");
 // db connection
@@ -17,4 +18,6 @@ mongoose
 });
 
 app.use(express.json())
+app.use("/user", require("./router/router"));
+
   app.listen(8080, () => console.log("Server is running on port 8080"));
